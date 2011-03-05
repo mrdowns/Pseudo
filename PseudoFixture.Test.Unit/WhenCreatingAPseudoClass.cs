@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using PseudoFixture.Test.Unit.Helpers;
 
 namespace PseudoFixture.Test.Unit
 {

@@ -16,7 +16,7 @@ namespace PseudoFixture
 
         public T Create()
         {
-            var pseudoInterceptor = new PseudoInterceptor(_random);
+            var pseudoInterceptor = new PseudoInterceptor(_random, Generator);
 
             return Generator.CreateClassProxy<T>(pseudoInterceptor);
         }
@@ -25,11 +25,13 @@ namespace PseudoFixture
     public class PseudoInterceptor : IInterceptor
     {
         private readonly Random _random;
+        private readonly ProxyGenerator _generator;
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
 
-        public PseudoInterceptor(Random random)
+        public PseudoInterceptor(Random random, ProxyGenerator generator)
         {
             _random = random;
+            _generator = generator;
         }
 
         public void Intercept(IInvocation invocation)
@@ -61,9 +63,6 @@ namespace PseudoFixture
             if (t == typeof(double))
                 return _random.NextDouble();
 
-            if (t == typeof(string))
-                return _random.Next().ToString();
-
             if (t == typeof(char))
                 return (char) _random.Next(33, 126);
 
@@ -76,6 +75,13 @@ namespace PseudoFixture
 
             if (t == typeof (bool))
                 return false;
+            
+            if (t == typeof(string))
+                return _random.Next().ToString();
+
+            //leave this statement after reference types for which we know how to return a random value, e.g. string
+            if (!t.IsValueType)
+                return _generator.CreateClassProxy(t, this);
 
             throw new ArgumentException("Tried to generate a random value for unrecognized type: " + t.Name);
         }

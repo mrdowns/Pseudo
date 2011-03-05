@@ -1,4 +1,4 @@
-﻿namespace PseudoFixture.Test.Unit
+﻿namespace PseudoFixture.Test.Unit.Helpers
 {
     public class ReferenceType
     {

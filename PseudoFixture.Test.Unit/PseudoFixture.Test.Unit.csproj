@@ -43,12 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReferenceType.cs" />
+    <Compile Include="Helpers\ReferenceType.cs" />
+    <Compile Include="IdempotentEqualityConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferenceTypesDummy.cs" />
-    <Compile Include="ValueTypesDummy.cs" />
+    <Compile Include="Helpers\ReferenceTypesDummy.cs" />
+    <Compile Include="Helpers\SpecFor.cs" />
+    <Compile Include="Helpers\ValueTypesDummy.cs" />
     <Compile Include="WhenCreatingAPseudoClass.cs" />
-    <Compile Include="WhenGettingValueTypesReturnValueIsRandomAndIdempotent.cs" />
+    <Compile Include="WhenGettingReferenceTypes.cs" />
+    <Compile Include="WhenGettingValueTypes_ItReturnsRandomAndIdempotentValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PseudoFixture\PseudoFixture.csproj">
