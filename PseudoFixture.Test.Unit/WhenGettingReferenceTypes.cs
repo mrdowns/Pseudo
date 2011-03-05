@@ -23,10 +23,27 @@ namespace PseudoFixture.Test.Unit
         [Test]
         public void ItRandomizesTheObjectsStringProperties()
         {
-            string name = Subject.Reference.Name;
-            Assert.That(name, Is.Not.Null);
-            Assert.That(name, Is.Not.EqualTo(string.Empty));
-            Assert.That(name, new IdempotentEqualityConstraint(name));
+            Assert.That(Subject.Reference.Name, Is.Not.Null);
+            Assert.That(Subject.Reference.Name, Is.Not.EqualTo(string.Empty));
+            Assert.That(Subject.Reference.Name, new IdempotentEqualityConstraint(Subject.Reference.Name));
+        }
+
+        [Test]
+        public void ItHandlesCircularReferences()
+        {
+            var circularId = Subject.Reference.CircularReference.CircularReference.CircularReference.CircularReference.Id;
+
+            Assert.That(circularId, Is.GreaterThan(0));
+            Assert.That(Subject.Reference.CircularReference.CircularReference.CircularReference.CircularReference.Id, 
+                new IdempotentEqualityConstraint(circularId));
+        }
+
+        [Test]
+        public void ItReturnsADifferentObjectForEachLevelOfCircularReference()
+        {
+            Assert.That(
+                Subject.Reference.CircularReference.Id, 
+                Is.Not.EqualTo(Subject.Reference.CircularReference.CircularReference.Id));
         }
     }
 }

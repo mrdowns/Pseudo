@@ -4,6 +4,6 @@
     {
         public virtual string Name { get; set; }
         public virtual int Id { get; set; }
-        public ReferenceType CircularReference { get; set; }
+        public virtual ReferenceType CircularReference { get; set; }
     }
 }
