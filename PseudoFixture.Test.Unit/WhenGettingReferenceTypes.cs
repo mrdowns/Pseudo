@@ -1,6 +1,4 @@
-﻿using System;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
+﻿using NUnit.Framework;
 using PseudoFixture.Test.Unit.Helpers;
 
 namespace PseudoFixture.Test.Unit
